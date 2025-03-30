@@ -76,3 +76,19 @@ salesRep.addClient(customer2);
 console.log(`${customer1.name} spent: $${salesRep.getClientTotal('John Doe')}`);  //Output: John Doe spent: $150
 console.log(`${customer2.name} spent: $${salesRep.getClientTotal('Jane Smith')}`); //Output: Jane Smith spent: $350
 console.log(salesRep.getClientTotal('Mike Johnson'));
+const totalRevenue = salesRep.clients.reduce((total, client) => total + client.getTotalSpent(), 0);
+const highSpendingCustomers = salesRep.clients.filter(client => client.getTotalSpent() > 500);
+const customerSummary = salesRep.clients.map(client => ({
+    name: client.name,
+    totalSpent: client.getTotalSpent()
+}));
+// Log the results
+console.log("Total revenue: $" + totalRevenue);
+console.log("High-spending customers:");
+highSpendingCustomers.forEach(client => {
+    console.log(client.name + " spent: $" + client.getTotalSpent());
+});
+console.log("Customer summary:");
+customerSummary.forEach(client => {
+    console.log(`${client.name}: $${client.totalSpent}`);
+});
