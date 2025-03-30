@@ -13,6 +13,29 @@ class Customer {
         return this.purchaseHistory.reduce((total, amount) => total + amount, 0);
     }
 }
+class VIPCustomer extends Customer {
+    //Constructor to initialize the name, email, and VIP level
+    constructor(name, email, vipLevel) {
+        super(name, email);  //Call the parent constructor
+        this.vipLevel = vipLevel;  //Set the VIP level (Gold or Platinum)
+    }
+    //Override the getTotalSpent method to include a 10% loyalty bonus
+    getTotalSpent() {
+        const totalSpent = super.getTotalSpent(); //Get the total spent from the parent class
+        const loyaltyBonus = totalSpent * 0.10;  //10% bonus
+        return totalSpent + loyaltyBonus;  //Return total with bonus
+    }
+}
+//Creating VIPCustomer instances
+const vipCustomer1 = new VIPCustomer('John Doe', 'john.doe@example.com', 'Gold');
+vipCustomer1.addPurchase(100);
+vipCustomer1.addPurchase(50);
+const vipCustomer2 = new VIPCustomer('Jane Smith', 'jane.smith@example.com', 'Platinum');
+vipCustomer2.addPurchase(200);
+vipCustomer2.addPurchase(150);
+//Displaying total spent for VIP customers with loyalty bonus
+console.log(`${vipCustomer1.name} spent (with loyalty bonus): $${vipCustomer1.getTotalSpent()}`); 
+console.log(`${vipCustomer2.name} spent (with loyalty bonus): $${vipCustomer2.getTotalSpent()}`);
 class SalesRep {
     //Constructor to initialize properties
     constructor(name) {
